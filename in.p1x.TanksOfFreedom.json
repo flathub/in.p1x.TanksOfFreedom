@@ -1,7 +1,7 @@
 {
   "app-id": "in.p1x.TanksOfFreedom",
   "runtime": "org.freedesktop.Platform",
-  "runtime-version": "18.08",
+  "runtime-version": "20.08",
   "sdk": "org.freedesktop.Sdk",
   "command": "tanksoffreedom",
   "finish-args": [
@@ -29,7 +29,7 @@
       ],
       "build-commands": [ "python setup.py install --prefix=${FLATPAK_DEST} --optimize=1" ]
     },
-    "shared-modules/glu/glu-9.0.0.json",
+    "shared-modules/glu/glu-9.json",
     {
       "name": "godot",
       "buildsystem": "simple",
