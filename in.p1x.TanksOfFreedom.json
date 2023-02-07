@@ -33,8 +33,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/godotengine/godot/archive/2.1.5-stable.tar.gz",
-          "sha256": "74179c08bcc20cc89b4ac2785a31f201d81eb4aa875c80ffcb82d9fb80e8e187"
+          "url": "https://github.com/godotengine/godot/archive/2.1.6-stable.tar.gz",
+          "sha256": "5bfc57f2ee24dccfdcefe491a3be1a07b39299f2fcfa03202b8b4c6c2dd5122b"
         }
       ],
       "build-commands": [
@@ -69,8 +69,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/w84death/Tanks-of-Freedom/archive/0.7.0-beta.tar.gz",
-          "sha256": "6ca6a633c82390a3c9dac8ba4481c4f5439dd1b25e732db5552586e9cbf0a74c"
+          "url": "https://github.com/w84death/Tanks-of-Freedom/archive/0.7.1-beta.tar.gz",
+          "sha256": "5af5471f0c2a85f4bad91dff395d7575c4ef6a6707e9ede3882661216d7497db"
         },
         {
           "type": "file",
