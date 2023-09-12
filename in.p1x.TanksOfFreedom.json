@@ -1,7 +1,7 @@
 {
   "app-id": "in.p1x.TanksOfFreedom",
   "runtime": "org.freedesktop.Platform",
-  "runtime-version": "20.08",
+  "runtime-version": "22.08",
   "sdk": "org.freedesktop.Sdk",
   "command": "tanksoffreedom",
   "finish-args": [
@@ -90,7 +90,7 @@
       ],
       "buildsystem": "simple",
       "post-install": [
-        "for size in 16 24 32 48 128 256 512; do 
+        "for size in 16 24 32 48 128 256 512; do
         install -Dm644 ${FLATPAK_DEST}/tanksoffreedom/assets/icons/icon${size}.png ${FLATPAK_DEST}/share/icons/hicolor/${size}x${size}/apps/${FLATPAK_ID}.png
         done"
       ],
