@@ -1,7 +1,7 @@
 {
   "app-id": "in.p1x.TanksOfFreedom",
   "runtime": "org.freedesktop.Platform",
-  "runtime-version": "20.08",
+  "runtime-version": "24.08",
   "sdk": "org.freedesktop.Sdk",
   "command": "tanksoffreedom",
   "finish-args": [
@@ -20,11 +20,11 @@
       "sources": [
         {
           "type": "archive",
-          "url": "http://downloads.sourceforge.net/project/scons/scons/3.0.4/scons-3.0.4.tar.gz",
-          "sha256": "e2b8b36e25492720a05c0f0a92a219b42d11ce0c51e3397a1e8296dfea1d9b1a"
+          "url": "https://downloads.sourceforge.net/project/scons/scons/4.8.1/SCons-4.8.1.tar.gz",
+          "sha256": "cad573b329b6a5bc7e654b01f0231064acc979026af68a9e467ddb32bf2ee501"
         }
       ],
-      "build-commands": [ "python setup.py install --prefix=${FLATPAK_DEST} --optimize=1" ]
+      "build-commands": [ "pip3 install --no-index --no-build-isolation --prefix=/app ." ]
     },
     "shared-modules/glu/glu-9.json",
     {
@@ -33,19 +33,20 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/godotengine/godot/archive/2.1.5-stable.tar.gz",
-          "sha256": "74179c08bcc20cc89b4ac2785a31f201d81eb4aa875c80ffcb82d9fb80e8e187"
+          "url": "https://github.com/godotengine/godot/releases/download/4.3-stable/godot-4.3-stable.tar.xz",
+          "sha256": "751e55bfad8e04b846f9cf7b6eb80e058986a2cb1b103fc0fe6a4d8526a20e56"
         }
       ],
       "build-commands": [
-        "scons platform=x11 \\
-          CCFLAGS=-I${C_INCLUDE_PATH} \\
+        "scons CCFLAGS=-I${C_INCLUDE_PATH} \\
           prefix=${FLATPAK_DEST} \\
           unix_global_settings_path=${FLATPAK_DEST} \\
           verbose=yes \\
           -j $FLATPAK_BUILDER_N_JOBS \\
-          target=release_debug \\
-          use_llvm=yes \\
+          target=template_release \\
+          use_llvm=no \\
+          builtin_harfbuzz=no \\
+          builtin_graphite=no \\
           builtin_freetype=no \\
           builtin_libmpcdec=yes \\
           builtin_libogg=no \\
@@ -66,6 +67,19 @@
     },
     {
       "name": "tanksoffreedom",
+      "buildsystem": "simple",
+       "build-commands": [
+        "install -Dm755 tanksoffreedom.sh ${FLATPAK_DEST}/bin/tanksoffreedom",
+        "install -Dm644 in.p1x.TanksOfFreedom.appdata.xml -t ${FLATPAK_DEST}/share/appdata/",
+        "install -Dm644 in.p1x.TanksOfFreedom.desktop -t ${FLATPAK_DEST}/share/applications/",
+        "mkdir -p ${FLATPAK_DEST}/tanksoffreedom",
+        "mv * ${FLATPAK_DEST}/tanksoffreedom/"
+      ],
+      "post-install": [
+        "for size in 16 24 32 48 128 256 512; do 
+        install -Dm644 ${FLATPAK_DEST}/tanksoffreedom/assets/icons/icon${size}.png ${FLATPAK_DEST}/share/icons/hicolor/${size}x${size}/apps/${FLATPAK_ID}.png
+        done"
+      ],
       "sources": [
         {
           "type": "archive",
@@ -87,19 +101,6 @@
             "exec /app/bin/godot-bin -path /app/tanksoffreedom \"$@\""
           ]
         }
-      ],
-      "buildsystem": "simple",
-      "post-install": [
-        "for size in 16 24 32 48 128 256 512; do 
-        install -Dm644 ${FLATPAK_DEST}/tanksoffreedom/assets/icons/icon${size}.png ${FLATPAK_DEST}/share/icons/hicolor/${size}x${size}/apps/${FLATPAK_ID}.png
-        done"
-      ],
-      "build-commands": [
-        "install -Dm755 tanksoffreedom.sh ${FLATPAK_DEST}/bin/tanksoffreedom",
-        "install -Dm644 in.p1x.TanksOfFreedom.appdata.xml -t ${FLATPAK_DEST}/share/appdata/",
-        "install -Dm644 in.p1x.TanksOfFreedom.desktop -t ${FLATPAK_DEST}/share/applications/",
-        "mkdir -p ${FLATPAK_DEST}/tanksoffreedom",
-        "mv * ${FLATPAK_DEST}/tanksoffreedom/"
       ]
     }
   ]
