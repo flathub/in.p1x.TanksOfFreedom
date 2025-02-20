@@ -5,18 +5,20 @@
   "sdk": "org.freedesktop.Sdk",
   "command": "tanksoffreedom",
   "finish-args": [
-     "--socket=x11",
-     "--socket=pulseaudio",
-     "--persist=.godot",
-     "--share=ipc",
-     "--share=network",
-     "--device=all"
+    "--socket=x11",
+    "--socket=pulseaudio",
+    "--persist=.godot",
+    "--share=ipc",
+    "--share=network",
+    "--device=all"
   ],
   "modules": [
     {
       "name": "scons",
       "buildsystem": "simple",
-      "cleanup": [ "*" ],
+      "cleanup": [
+        "*"
+      ],
       "sources": [
         {
           "type": "archive",
@@ -24,7 +26,9 @@
           "sha256": "e2b8b36e25492720a05c0f0a92a219b42d11ce0c51e3397a1e8296dfea1d9b1a"
         }
       ],
-      "build-commands": [ "python setup.py install --prefix=${FLATPAK_DEST} --optimize=1" ]
+      "build-commands": [
+        "python setup.py install --prefix=${FLATPAK_DEST} --optimize=1"
+      ]
     },
     "shared-modules/glu/glu-9.json",
     {
@@ -33,35 +37,13 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/godotengine/godot/archive/2.1.5-stable.tar.gz",
-          "sha256": "74179c08bcc20cc89b4ac2785a31f201d81eb4aa875c80ffcb82d9fb80e8e187"
+          "url": "https://github.com/godotengine/godot/archive/2.1.6-stable.tar.gz",
+          "sha256": "5bfc57f2ee24dccfdcefe491a3be1a07b39299f2fcfa03202b8b4c6c2dd5122b"
         }
       ],
       "build-commands": [
-        "scons platform=x11 \\
-          CCFLAGS=-I${C_INCLUDE_PATH} \\
-          prefix=${FLATPAK_DEST} \\
-          unix_global_settings_path=${FLATPAK_DEST} \\
-          verbose=yes \\
-          -j $FLATPAK_BUILDER_N_JOBS \\
-          target=release_debug \\
-          use_llvm=yes \\
-          builtin_freetype=no \\
-          builtin_libmpcdec=yes \\
-          builtin_libogg=no \\
-          builtin_libpng=no \\
-          builtin_libtheora=no \\
-          builtin_libvorbis=no \\
-          builtin_libwebp=no \\
-          builtin_libvpx=no \\
-          builtin_zlib=no \\
-          builtin_opus=yes \\
-          builtin_speex=yes \\
-          builtin_squish=yes \\
-          pulseaudio=yes \\
-          udev=no \\
-          tools=no",
-          "install -D -m755 bin/godot* ${FLATPAK_DEST}/bin/godot-bin"
+        "scons platform=x11 CCFLAGS=-I${C_INCLUDE_PATH} prefix=${FLATPAK_DEST} unix_global_settings_path=${FLATPAK_DEST} verbose=yes -j $FLATPAK_BUILDER_N_JOBS target=release_debug use_llvm=yes builtin_freetype=no builtin_libmpcdec=yes builtin_libogg=no builtin_libpng=no builtin_libtheora=no builtin_libvorbis=no builtin_libwebp=no builtin_libvpx=no builtin_zlib=no builtin_opus=yes builtin_speex=yes builtin_squish=yes pulseaudio=yes udev=no tools=no",
+        "install -D -m755 bin/godot* ${FLATPAK_DEST}/bin/godot-bin"
       ]
     },
     {
@@ -69,8 +51,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/w84death/Tanks-of-Freedom/archive/0.7.0-beta.tar.gz",
-          "sha256": "6ca6a633c82390a3c9dac8ba4481c4f5439dd1b25e732db5552586e9cbf0a74c"
+          "url": "https://github.com/w84death/Tanks-of-Freedom/archive/0.7.1-beta.tar.gz",
+          "sha256": "5af5471f0c2a85f4bad91dff395d7575c4ef6a6707e9ede3882661216d7497db"
         },
         {
           "type": "file",
@@ -90,9 +72,7 @@
       ],
       "buildsystem": "simple",
       "post-install": [
-        "for size in 16 24 32 48 128 256 512; do 
-        install -Dm644 ${FLATPAK_DEST}/tanksoffreedom/assets/icons/icon${size}.png ${FLATPAK_DEST}/share/icons/hicolor/${size}x${size}/apps/${FLATPAK_ID}.png
-        done"
+        "for size in 16 24 32 48 128 256 512; do install -Dm644 ${FLATPAK_DEST}/tanksoffreedom/assets/icons/icon${size}.png ${FLATPAK_DEST}/share/icons/hicolor/${size}x${size}/apps/${FLATPAK_ID}.png; done"
       ],
       "build-commands": [
         "install -Dm755 tanksoffreedom.sh ${FLATPAK_DEST}/bin/tanksoffreedom",
