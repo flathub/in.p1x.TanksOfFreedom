@@ -4,7 +4,7 @@
   "runtime-version": "24.08",
   "sdk": "org.freedesktop.Sdk",
   "sdk-extensions": [
-    "org.freedesktop.Sdk.Extension.llvm17"
+    "org.freedesktop.Sdk.Extension.llvm15"
   ],
   "command": "tanksoffreedom",
   "finish-args": [
@@ -20,8 +20,8 @@
       "name": "scons",
       "buildsystem": "simple",
       "build-options": {
-          "append-path": "/usr/lib/sdk/llvm17/bin",
-          "prepend-ld-library-path": "/usr/lib/sdk/llvm17/lib"
+          "append-path": "/usr/lib/sdk/llvm15/bin",
+          "prepend-ld-library-path": "/usr/lib/sdk/llvm15/lib"
       },
       "cleanup": [
         "*"
