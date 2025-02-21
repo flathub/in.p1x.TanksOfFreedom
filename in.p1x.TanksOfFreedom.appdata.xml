@@ -29,6 +29,9 @@
       <image>https://img.itch.zone/aW1hZ2UvMTc3MDUvMjI3MjE3LnBuZw==/original/su8X9E.png</image>
     </screenshot>
   </screenshots>
+  <categories>
+    <category>Game</category>
+  </categories>
   <developer_name>P1X Team</developer_name>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-fantasy">moderate</content_attribute>

@@ -1,8 +1,11 @@
 {
   "app-id": "in.p1x.TanksOfFreedom",
   "runtime": "org.freedesktop.Platform",
-  "runtime-version": "20.08",
+  "runtime-version": "24.08",
   "sdk": "org.freedesktop.Sdk",
+  "sdk-extensions": [
+    "org.freedesktop.Sdk.Extension.llvm19"
+  ],
   "command": "tanksoffreedom",
   "finish-args": [
     "--socket=x11",
@@ -16,14 +19,18 @@
     {
       "name": "scons",
       "buildsystem": "simple",
+      "build-options": {
+          "append-path": "/usr/lib/sdk/llvm19/bin",
+          "prepend-ld-library-path": "/usr/lib/sdk/llvm19/lib"
+      },
       "cleanup": [
         "*"
       ],
       "sources": [
         {
           "type": "archive",
-          "url": "http://downloads.sourceforge.net/project/scons/scons/3.0.4/scons-3.0.4.tar.gz",
-          "sha256": "e2b8b36e25492720a05c0f0a92a219b42d11ce0c51e3397a1e8296dfea1d9b1a"
+          "url": "https://downloads.sourceforge.net/project/scons/scons/3.1.2/scons-3.1.2.tar.gz",
+          "sha256": "7801f3f62f654528e272df780be10c0e9337e897650b62ddcee9f39fde13f8fb"
         }
       ],
       "build-commands": [
@@ -34,6 +41,10 @@
     {
       "name": "godot",
       "buildsystem": "simple",
+      "build-options": {
+          "append-path": "/usr/lib/sdk/llvm19/bin",
+          "prepend-ld-library-path": "/usr/lib/sdk/llvm19/lib"
+      },
       "sources": [
         {
           "type": "archive",
@@ -42,7 +53,7 @@
         }
       ],
       "build-commands": [
-        "scons platform=x11 CCFLAGS=-I${C_INCLUDE_PATH} prefix=${FLATPAK_DEST} unix_global_settings_path=${FLATPAK_DEST} verbose=yes -j $FLATPAK_BUILDER_N_JOBS target=release_debug use_llvm=yes builtin_freetype=no builtin_libmpcdec=yes builtin_libogg=no builtin_libpng=no builtin_libtheora=no builtin_libvorbis=no builtin_libwebp=no builtin_libvpx=no builtin_zlib=no builtin_opus=yes builtin_speex=yes builtin_squish=yes pulseaudio=yes udev=no tools=no",
+        "scons platform=x11 CCFLAGS=\"-I${C_INCLUDE_PATH} -Wno-register\" prefix=${FLATPAK_DEST} unix_global_settings_path=${FLATPAK_DEST} verbose=yes -j $FLATPAK_BUILDER_N_JOBS target=release_debug use_llvm=yes builtin_freetype=no builtin_libmpcdec=yes builtin_libogg=no builtin_libpng=no builtin_libtheora=no builtin_libvorbis=no builtin_libwebp=no builtin_libvpx=no builtin_zlib=no builtin_opus=yes builtin_speex=yes builtin_squish=yes pulseaudio=yes udev=no tools=no",
         "install -D -m755 bin/godot* ${FLATPAK_DEST}/bin/godot-bin"
       ]
     },
