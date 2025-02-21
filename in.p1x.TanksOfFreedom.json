@@ -41,6 +41,10 @@
     {
       "name": "godot",
       "buildsystem": "simple",
+      "build-options": {
+          "append-path": "/usr/lib/sdk/llvm19/bin",
+          "prepend-ld-library-path": "/usr/lib/sdk/llvm19/lib"
+      },
       "sources": [
         {
           "type": "archive",
