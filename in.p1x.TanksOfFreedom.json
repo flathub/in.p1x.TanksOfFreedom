@@ -53,7 +53,7 @@
         }
       ],
       "build-commands": [
-        "scons platform=x11 CCFLAGS=\"-I${C_INCLUDE_PATH} -fpermissive -Wno-register\" prefix=${FLATPAK_DEST} unix_global_settings_path=${FLATPAK_DEST} verbose=yes -j $FLATPAK_BUILDER_N_JOBS target=release_debug use_llvm=yes builtin_freetype=no builtin_libmpcdec=yes builtin_libogg=no builtin_libpng=no builtin_libtheora=no builtin_libvorbis=no builtin_libwebp=no builtin_libvpx=no builtin_zlib=no builtin_opus=yes builtin_speex=yes builtin_squish=yes pulseaudio=yes udev=no tools=no",
+        "scons platform=x11 CCFLAGS=\"-I${C_INCLUDE_PATH} -Wno-register\" prefix=${FLATPAK_DEST} unix_global_settings_path=${FLATPAK_DEST} verbose=yes -j $FLATPAK_BUILDER_N_JOBS target=release_debug use_llvm=yes builtin_freetype=no builtin_libmpcdec=yes builtin_libogg=no builtin_libpng=no builtin_libtheora=no builtin_libvorbis=no builtin_libwebp=no builtin_libvpx=no builtin_zlib=no builtin_opus=yes builtin_speex=yes builtin_squish=yes pulseaudio=yes udev=no tools=no",
         "install -D -m755 bin/godot* ${FLATPAK_DEST}/bin/godot-bin"
       ]
     },
