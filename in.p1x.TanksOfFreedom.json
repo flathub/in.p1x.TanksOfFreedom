@@ -3,9 +3,6 @@
   "runtime": "org.freedesktop.Platform",
   "runtime-version": "24.08",
   "sdk": "org.freedesktop.Sdk",
-  "sdk-extensions": [
-    "org.freedesktop.Sdk.Extension.llvm19"
-  ],
   "command": "tanksoffreedom",
   "finish-args": [
     "--socket=x11",
@@ -17,44 +14,17 @@
   ],
   "modules": [
     {
-      "name": "scons",
-      "buildsystem": "simple",
-      "build-options": {
-          "append-path": "/usr/lib/sdk/llvm19/bin",
-          "prepend-ld-library-path": "/usr/lib/sdk/llvm19/lib"
-      },
-      "cleanup": [
-        "*"
-      ],
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://downloads.sourceforge.net/project/scons/scons/3.1.2/scons-3.1.2.tar.gz",
-          "sha256": "7801f3f62f654528e272df780be10c0e9337e897650b62ddcee9f39fde13f8fb"
-        }
-      ],
-      "build-commands": [
-        "python setup.py install --prefix=${FLATPAK_DEST} --optimize=1"
-      ]
-    },
-    "shared-modules/glu/glu-9.json",
-    {
       "name": "godot",
       "buildsystem": "simple",
-      "build-options": {
-          "append-path": "/usr/lib/sdk/llvm19/bin",
-          "prepend-ld-library-path": "/usr/lib/sdk/llvm19/lib"
-      },
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/godotengine/godot/archive/2.1.6-stable.tar.gz",
-          "sha256": "5bfc57f2ee24dccfdcefe491a3be1a07b39299f2fcfa03202b8b4c6c2dd5122b"
+          "url": "https://github.com/godotengine/godot-builds/releases/download/2.1.6-stable/Godot_v2.1.6-stable_x11.64.zip",
+          "sha256": "302e1eec6642f1722674c3d615e98ee08719c3b79cd43618906d20ce9603fad1"
         }
       ],
       "build-commands": [
-        "scons platform=x11 CCFLAGS=-I${C_INCLUDE_PATH} prefix=${FLATPAK_DEST} unix_global_settings_path=${FLATPAK_DEST} verbose=yes -j $FLATPAK_BUILDER_N_JOBS target=release_debug use_llvm=yes builtin_freetype=no builtin_libmpcdec=yes builtin_libogg=no builtin_libpng=no builtin_libtheora=no builtin_libvorbis=no builtin_libwebp=no builtin_libvpx=no builtin_zlib=no builtin_opus=yes builtin_speex=yes builtin_squish=yes pulseaudio=yes udev=no tools=no",
-        "install -D -m755 bin/godot* ${FLATPAK_DEST}/bin/godot-bin"
+        "install -D -m755 Godot_v2.1.6-stable_x11.64* ${FLATPAK_DEST}/bin/godot-bin"
       ]
     },
     {
