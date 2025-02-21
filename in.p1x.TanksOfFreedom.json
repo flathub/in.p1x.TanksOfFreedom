@@ -1,8 +1,11 @@
 {
   "app-id": "in.p1x.TanksOfFreedom",
   "runtime": "org.freedesktop.Platform",
-  "runtime-version": "20.08",
+  "runtime-version": "24.08",
   "sdk": "org.freedesktop.Sdk",
+  "sdk-extensions": [
+    "org.freedesktop.Sdk.Extension.llvm17"
+  ],
   "command": "tanksoffreedom",
   "finish-args": [
     "--socket=x11",
@@ -16,13 +19,17 @@
     {
       "name": "scons",
       "buildsystem": "simple",
+      "build-options": {
+          "append-path": "/usr/lib/sdk/llvm17/bin",
+          "prepend-ld-library-path": "/usr/lib/sdk/llvm17/lib"
+      },
       "cleanup": [
         "*"
       ],
       "sources": [
         {
           "type": "archive",
-          "url": "http://downloads.sourceforge.net/project/scons/scons/3.0.4/scons-3.0.4.tar.gz",
+          "url": "https://downloads.sourceforge.net/project/scons/scons/3.0.4/scons-3.0.4.tar.gz",
           "sha256": "e2b8b36e25492720a05c0f0a92a219b42d11ce0c51e3397a1e8296dfea1d9b1a"
         }
       ],
