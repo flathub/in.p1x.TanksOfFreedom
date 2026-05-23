@@ -1,0 +1,53 @@
+{
+    "name": "godot",
+    "buildsystem": "simple",
+    "build-options": {
+        "append-path": "/usr/lib/sdk/llvm22/bin",
+        "prepend-ld-library-path": "/usr/lib/sdk/llvm22/lib"
+    },
+    "build-commands": [
+        "scons platform=x11 CCFLAGS=\"-I${C_INCLUDE_PATH} -Wno-register -Wno-error=incompatible-pointer-types\" prefix=${FLATPAK_DEST} unix_global_settings_path=${FLATPAK_DEST} verbose=yes -j $FLATPAK_BUILDER_N_JOBS target=release_debug use_llvm=yes builtin_freetype=no builtin_libmpcdec=yes builtin_libogg=no builtin_libpng=no builtin_libtheora=no builtin_libvorbis=no builtin_libwebp=no builtin_libvpx=no builtin_zlib=no builtin_opus=yes builtin_speex=yes builtin_squish=yes pulseaudio=yes udev=no tools=no",
+        "install -D -m755 bin/godot* ${FLATPAK_DEST}/bin/godot-bin"
+    ],
+    "sources": [
+        {
+            "type": "archive",
+            "url": "https://github.com/godotengine/godot/archive/2.1.6-stable.tar.gz",
+            "sha256": "5bfc57f2ee24dccfdcefe491a3be1a07b39299f2fcfa03202b8b4c6c2dd5122b"
+        }
+    ],
+    "modules": [
+        {
+            "name": "glu",
+            "buildsystem": "meson",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://archive.mesa3d.org/glu/glu-9.0.3.tar.xz",
+                    "sha256": "bd43fe12f374b1192eb15fe20e45ff456b9bc26ab57f0eee919f96ca0f8a330f"
+                }
+            ]
+        },
+        {
+            "name": "scons",
+            "buildsystem": "simple",
+            "build-options": {
+                "append-path": "/usr/lib/sdk/llvm22/bin",
+                "prepend-ld-library-path": "/usr/lib/sdk/llvm22/lib"
+            },
+            "build-commands": [
+                "python setup.py install --prefix=${FLATPAK_DEST} --optimize=1"
+            ],
+            "cleanup": [
+                "*"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://downloads.sourceforge.net/project/scons/scons/3.1.2/scons-3.1.2.tar.gz",
+                    "sha256": "7801f3f62f654528e272df780be10c0e9337e897650b62ddcee9f39fde13f8fb"
+                }
+            ]
+        }
+    ]
+}
